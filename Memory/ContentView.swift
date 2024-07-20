@@ -6,56 +6,60 @@
 //
 
 import SwiftUI
-import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
+        Grid(horizontalSpacing: 10, verticalSpacing: 10) {
+            GridRow {
+                CardView()
+                CardView()
+                CardView()
+                CardView(isFolded: false)
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+            GridRow {
+                CardView()
+                CardView(isFolded: false)
+                CardView()
+                CardView()
             }
-        } detail: {
-            Text("Select an item")
+            GridRow {
+                CardView(isFolded: false)
+                CardView()
+                CardView()
+                CardView()
+            }
+            GridRow {
+                CardView(isFolded: false)
+                CardView()
+                CardView()
+                CardView()
+            }
         }
+        .foregroundColor(.orange)
+        .padding()
     }
+}
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+struct CardView: View {
+    var isFolded: Bool = true
+    
+    var body: some View {
+        ZStack {
+            if isFolded {
+                RoundedRectangle(cornerRadius: 12)
+            }
+            else
+            {
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(.white)
+                RoundedRectangle(cornerRadius: 12)
+                    .strokeBorder(lineWidth: 2)
+                Text("🏎️").font(.largeTitle)
             }
         }
     }
 }
-
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
 }
