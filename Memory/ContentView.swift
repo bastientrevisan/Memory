@@ -42,21 +42,24 @@ struct ContentView: View {
 }
 
 struct CardView: View {
-    var isFolded: Bool = true
+    @State var isFolded = true
     
     var body: some View {
         ZStack {
+            let baseShape = RoundedRectangle(cornerRadius: 12)
+            
             if isFolded {
-                RoundedRectangle(cornerRadius: 12)
+                baseShape.fill()
             }
             else
             {
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(.white)
-                RoundedRectangle(cornerRadius: 12)
-                    .strokeBorder(lineWidth: 2)
+                baseShape.fill(.white)
+                baseShape.strokeBorder(lineWidth: 2)
                 Text("🏎️").font(.largeTitle)
             }
+        }
+        .onTapGesture {
+            isFolded.toggle()
         }
     }
 }
