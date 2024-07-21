@@ -8,32 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
+    let emojis = ["🏎️", "🚒", "🚲", "🏍️", "🚜", "🚁", "🛥️", "🚀",
+                  "🏎️", "🚒", "🚲", "🏍️", "🚜", "🚁", "🛥️", "🚀"]
 
     var body: some View {
+        
         Grid(horizontalSpacing: 10, verticalSpacing: 10) {
             GridRow {
-                CardView()
-                CardView()
-                CardView()
-                CardView(isFolded: false)
-            }
-            GridRow {
-                CardView()
-                CardView(isFolded: false)
-                CardView()
-                CardView()
-            }
-            GridRow {
-                CardView(isFolded: false)
-                CardView()
-                CardView()
-                CardView()
-            }
-            GridRow {
-                CardView(isFolded: false)
-                CardView()
-                CardView()
-                CardView()
+                ForEach(emojis.indices, id: \.self) { index in
+                    CardView(content: emojis[index])
+                }
             }
         }
         .foregroundColor(.orange)
@@ -42,6 +26,7 @@ struct ContentView: View {
 }
 
 struct CardView: View {
+    let content: String
     @State var isFolded = true
     
     var body: some View {
@@ -55,7 +40,7 @@ struct CardView: View {
             {
                 baseShape.fill(.white)
                 baseShape.strokeBorder(lineWidth: 2)
-                Text("🏎️").font(.largeTitle)
+                Text(content).font(.largeTitle)
             }
         }
         .onTapGesture {
