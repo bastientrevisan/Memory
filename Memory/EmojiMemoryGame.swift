@@ -9,9 +9,9 @@ import SwiftUI
 
 /* viewModel, l'interface entre notre modele et les vues. Les vues ne doivent pas pouvoir acceder au modele directement */
 class EmojiMemoryGame: ObservableObject {
-    /* En Swift c'est le compilateur qui decide de l'odre d'initialisation des proprietes d'une classe
-     * Ici si on ne met pas static, emojis peut etre appelé pour initialiser model alors qu'il ne sera pas initialisé lui meme
-     * static permet de dire au compilateur : Fait comme si c'etait une variable globale (donc initialisee en priorite) mais limite la au namespace de la classe */
+//    En Swift c'est le compilateur qui decide de l'odre d'initialisation des proprietes d'une classe
+//    Ici si on ne met pas static, emojis peut etre appelé pour initialiser model alors qu'il ne sera pas initialisé lui meme
+//    static permet de dire au compilateur : Fait comme si c'etait une variable globale (donc initialisee en priorite) mais limite la au namespace de la classe
     private static let emojis = ["🏎️", "🚒", "🚲", "🏍️", "🚜", "🚁", "🛥️", "🚀"]
     
     private static func createMemoryGame () -> MemoryGame<String> {

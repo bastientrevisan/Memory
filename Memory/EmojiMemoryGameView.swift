@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
-    // ObservedObject Si un champ Published de viewModel change alors la vue est rechargee
+    // ObservedObject Si un champ Published de cet objet change alors la vue est rechargee
     @ObservedObject var viewModel: EmojiMemoryGame
     
     var body: some View {
@@ -19,7 +19,6 @@ struct EmojiMemoryGameView: View {
             Button("Shuffle") {
                 viewModel.shuffle()
             }
-//            cardCountAdjusters
         }
     }
     
@@ -35,34 +34,6 @@ struct EmojiMemoryGameView: View {
         .foregroundColor(.orange)
         .padding()
     }
-    
-//    var cardCountAdjusters: some View {
-//        HStack {
-//            cardRemover
-//            Spacer()
-//            cardAdder
-//        }
-//        .imageScale(.large)
-//        .font(.largeTitle)
-//        .padding()
-//    }
-//    
-//    func cardCountAdjuster(by offset: Int, symbol: String) -> some View {
-//        Button(action: {
-//            cardCount += offset
-//        }, label: {
-//            Image(systemName: symbol)
-//        })
-//        .disabled(cardCount + offset < 1 || cardCount + offset > emojis.count)
-//    }
-//    
-//    var cardRemover: some View {
-//        cardCountAdjuster(by: -1, symbol: "rectangle.stack.badge.minus.fill")
-//    }
-//    
-//    var cardAdder: some View {
-//        cardCountAdjuster(by: +1, symbol: "rectangle.stack.badge.plus.fill")
-//    }
 }
 
 struct CardView: View {
@@ -88,12 +59,9 @@ struct CardView: View {
             baseShape.fill()
                 .opacity(card.isFaceUp ? 0 : 1)
         }
-//        .onTapGesture {
-//            card.isFaceUp.toggle()
-//        }
     }
 }
 
 #Preview {
-    EmojiMemoryGameView(viewModel: <#T##EmojiMemoryGame#>())
+    EmojiMemoryGameView(viewModel: EmojiMemoryGame())
 }
